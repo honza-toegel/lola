@@ -1,10 +1,7 @@
 package com.jto.lola.messages
 
 import com.jto.lola.SpringUtils
-import com.jto.lola.openapi.ChatBootService
-import com.jto.lola.openapi.ConversationMessage
-import com.jto.lola.openapi.ConversationSpecification
-import com.jto.lola.openapi.ConversationState
+import com.jto.lola.openapi.*
 import org.springframework.scheduling.annotation.EnableScheduling
 import org.springframework.scheduling.annotation.Scheduled
 import org.springframework.web.bind.annotation.*
@@ -37,7 +34,7 @@ class ChatMessagesRestController(private val chatBootService: ChatBootService) {
         return newChatMessage
     }
 
-    @Scheduled(cron = "*/20 * * * * *")
+    @Scheduled(cron = "*/2 * * * * *")
     fun mockChatBot() {
         if (chatMessages.isNotEmpty() && !chatMessages.last().isIncoming) {
             val conversationState = ConversationState(ConversationSpecification(
